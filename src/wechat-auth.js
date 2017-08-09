@@ -9,9 +9,11 @@
 class WeChatAuth {
   constructor (config) {
     let defaultConfig = {
+      componentAppid: '',
       appid: '',
       responseType: 'code',
       scope: 'snsapi_base ',
+      state: '',
       getCodeCallback: () => {}
     }
     this.config = Object.assign(defaultConfig, config)
@@ -23,8 +25,10 @@ class WeChatAuth {
     redirectUri = encodeURIComponent(redirectUriArr[0])
     this.removeAccessToken()
     this.removeAuthCode()
+
     let authPageBaseUri = 'https://open.weixin.qq.com/connect/oauth2/authorize'
-    let authParams = `?appid=${this.config.appid}&redirect_uri=${redirectUri}&response_type=${this.config.responseType}&scope=${this.config.scope}#wechat_redirect`
+    // let authParams = `?appid=${this.config.appid}&redirect_uri=${redirectUri}&response_type=${this.config.responseType}&scope=${this.config.scope}#wechat_redirect`
+    let authParams = `?appid=${this.config.appid}&redirect_uri=${redirectUri}&response_type=${this.config.responseType}&scope=${this.config.scope}&state=${this.config.state}&component_appid=${this.config.componentAppid}#wechat_redirect`
     window.location.href = authPageBaseUri + authParams
   }
 
