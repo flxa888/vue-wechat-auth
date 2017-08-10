@@ -38,7 +38,9 @@ export default {
 
     function beforeEach (to, from, next) {
       let query = querystring.parse(url.parse(window.location.href).query)
+      console.log("beforeEach:query:" + query)
       let code = query.code
+      console.log("beforeEach:code:" + code)
       urlCodeQueryFilter(code)
       if (!code && !checkRouterAuth(to, from, next)) {
         return false
